@@ -1,0 +1,5 @@
+1.htpasswd -c ./auth admin
+2.kubectl create secret generic traefik-login --from-file auth --namespace=kube-system
+3.add option in traefik-ingress.yml
+  ingress.kubernetes.io/auth-type: "basic"
+  ingress.kubernetes.io/auth-secret: "traefik-login"
