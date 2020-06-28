@@ -1,31 +1,19 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: traefik-web-ui
-  namespace: kube-system
-spec:
-  selector:
-    k8s-app: traefik-ingress-lb
-  ports:
-  - name: web
-    port: 80
-    targetPort: 8080
+# IngresRoute
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
+kind: IngressRoute
+apiVersion: traefik.containo.us/v1alpha1
 metadata:
-  name: traefik-web-ui
+  name: traefik-url
   namespace: kube-system
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    ingress.kubernetes.io/auth-type: "basic"
-    ingress.kubernetes.io/auth-secret: "traefik-login"
+
 spec:
-  rules:
-  - host: traefik.hs-network.info
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: traefik-web-ui
-          servicePort: web
+  entryPoints: 
+    - websecure
+  routes:
+  - match: Host(`trf.hs-network.info`) 
+    kind: Rule
+    services:
+    - name: traefik
+      port: 8100
+  tls:
+    certResolver: myresolver
