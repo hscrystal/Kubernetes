@@ -47,9 +47,17 @@ spec:
         - containerPort: 3000
           name: semaphore
         volumeMounts:
+        - name: semaphore-conf
+          mountPath: /etc/semaphore
         - name: semaphore-volume
           mountPath: /var/lib/semaphore
       volumes:
+      - name: semaphore-conf
+        configMap:
+          name: semaphore-config
+          items:
+            - key: config.json
+              path: config.json
       - name: semaphore-volume
         persistentVolumeClaim:
           claimName: semaphore-pvc
