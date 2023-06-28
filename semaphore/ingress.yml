@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: semaphore
+            name: ansible
             port:
               number: 3000
