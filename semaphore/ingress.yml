@@ -5,13 +5,13 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: semaphore.aslth.local
+  - host: ansible.aslth.local
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: ansible
+            name: semaphore
             port:
               number: 3000
