@@ -43,6 +43,8 @@ spec:
           value: admin@localhost
         - name: SEMAPHORE_ADMIN
           value: admin
+        - name: ANSIBLE_HOST_KEY_CHECKING
+          value: "False"
         ports:
         - containerPort: 3000
           name: semaphore
