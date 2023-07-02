@@ -56,3 +56,7 @@ spec:
             name: whoami
             port:
               number: 80
+  tls:
+    - hosts:
+      - whoami.aslth.local
+      secretName: whoami-tls
