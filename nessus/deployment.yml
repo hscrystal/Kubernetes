@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nessus
+  namespace: default
+  labels:
+    app: nessus
+spec:
+  selector:
+    matchLabels:
+      app: nessus
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nessus
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: tenable/nessus:10.5.2-ubuntu
+        name: nessus
+        env:
+        - name: ACTIVATION_CODE
+          valueFrom:
+            configMapKeyRef:
+              name: nessus-config
+              key: active_code
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: nessus-secret
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nessus-secret
+              key: password
+        ports:
+        - containerPort: 8834
+          name: nessus
+        volumeMounts:
+        - name: nessus-volume
+          mountPath: /opt/nessus/etc/nessus
+      volumes:
+      - name: nessus-volume
+        persistentVolumeClaim:
+          claimName: nessus-pvc
