@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nessus-config
+  namespace: default
+data:
+  active_code: <active-code>
