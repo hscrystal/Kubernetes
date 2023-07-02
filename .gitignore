@@ -1,3 +1,3 @@
 
-nessus/configmap.yaml
-nessus/secret.yaml
+nessus/configmap*
+nessus/secret*
