@@ -37,26 +37,3 @@ spec:
       port: 80
   selector:
     app: whoami
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: whoami
-  namespace: default
-spec:
-  rules:
-  - host: whoami.aslth.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: whoami
-            port:
-              number: 80
-  tls:
-    - hosts:
-      - whoami.aslth.local
-      secretName: whoami-tls
