@@ -8,3 +8,6 @@ You can also create multiple CNAME records targeting the same Tunnel, if desired
 Alternatively, you can perform this step from the command line by running 
 cloudflared tunnel route dns <tunnel> <hostname>. 
 For example, cloudflared tunnel route dns example-tunnel tunnel.example.coms
+
+Ref. https://nicwortel.nl/blog/2022/continuous-deployment-to-kubernetes-with-github-actions
+    https://www.robert-jensen.dk/posts/2024-external-dns-with-cloudflare/

@@ -6,7 +6,6 @@ metadata:
   namespace: default
   labels:
     app: whoami
-
 spec:
   replicas: 2
   selector:
@@ -37,3 +36,26 @@ spec:
       port: 80
   selector:
     app: whoami
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/hostname: whoami.hs-network.info
+    external-dns.alpha.kubernetes.io/target: 14f74df8-fb87-4275-9e2b-4b0412aa773c.cfargotunnel.com
+  name: whoami-ingress
+  namespace: default
+spec:
+  rules:
+  - host: whoami.hs-network.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: whoami
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

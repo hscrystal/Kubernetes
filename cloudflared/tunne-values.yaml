@@ -1,0 +1,19 @@
+cloudflare:
+  tunnelName: "home-lab"
+  tunnelId: "14f74df8-fb87-4275-9e2b-4b0412aa773c"
+  secretName: "tunnel-credentials"
+  ingress:
+    - hostname: "*.hs-network.info"
+      service: "https://ingress-nginx.ingress-nginx.svc.kube-home"
+      originRequest:
+        noTLSVerify: true
+
+resources:
+  limits:
+    cpu: "100m"
+    memory: "128Mi"
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+replicaCount: 1
